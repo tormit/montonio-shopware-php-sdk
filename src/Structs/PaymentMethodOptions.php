@@ -29,6 +29,10 @@ class PaymentMethodOptions extends AbstractStruct
      */
     protected $preferredLocale;
 
+    /**
+     * @var string
+     */
+    protected $preferredMethod;
 
     /**
      * @return string
@@ -120,6 +124,14 @@ class PaymentMethodOptions extends AbstractStruct
         return $this;
     }
 
+    public function getPreferredMethod(): string
+    {
+        return $this->preferredMethod;
+    }
 
-
+    public function setPreferredMethod(string $preferredMethod): PaymentMethodOptions
+    {
+        $this->preferredMethod = $preferredMethod;
+        return $this;
+    }
 }

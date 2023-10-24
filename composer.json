@@ -2,7 +2,6 @@
   "name": "montonio/montonio-php-sdk",
   "type": "library",
   "description": "Montonio SDK (PHP)",
-  "version": "1.0.0",
   "keywords": [
     "montonio",
     "payment",
