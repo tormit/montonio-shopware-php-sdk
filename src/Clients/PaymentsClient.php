@@ -6,6 +6,7 @@ use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Montonio\Structs\PaymentData;
+use Montonio\Structs\PaymentIntent;
 use stdClass;
 
 class PaymentsClient extends AbstractClient
@@ -85,12 +86,33 @@ class PaymentsClient extends AbstractClient
      */
     public function getPaymentMethods()
     {
-        $url = $this->getUrl('stores/setup').
+        $url = $this->getUrl('stores/setup') .
             '?access-key=' . $this->getAccessKey();
 
         return $this->call('GET', $url, null, [
             'Content-Type: application/json',
             'Authorization: Bearer ' . $this->getBearerToken(),
         ]);
+    }
+
+    /**
+     * @param PaymentData $paymentData
+     * @return array
+     * @throws Exception
+     */
+    public function draftPaymentIntent(PaymentData $paymentData): array
+    {
+        return $this->call(
+            'POST',
+            $this->getUrl('/payment-intents/draft'),
+            json_encode(
+                [
+                    'data' => $this->generatePaymentToken($paymentData),
+                ]
+            ),
+            [
+                'Content-Type: application/json',
+            ]
+        );
     }
 }

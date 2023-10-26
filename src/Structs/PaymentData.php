@@ -68,6 +68,23 @@ class PaymentData extends AbstractStruct
     /**
      * @return string
      */
+
+    /**
+     * @var string
+     */
+    protected $method;
+
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    public function setMethod(string $method): PaymentData
+    {
+        $this->method = $method;
+        return $this;
+    }
+
     public function getAccessKey(): ?string
     {
         return $this->accessKey;
