@@ -311,7 +311,7 @@ class PaymentData extends AbstractStruct
     /**
      * @return string
      */
-    public function getPaymentIntentUuid(): string
+    public function getPaymentIntentUuid(): ?string
     {
         return $this->paymentIntentUuid;
     }
