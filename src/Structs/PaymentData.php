@@ -68,7 +68,7 @@ class PaymentData extends AbstractStruct
     /**
      * @return string
      */
-
+    protected $paymentIntentUuid;
     /**
      * @var string
      */
@@ -305,6 +305,24 @@ class PaymentData extends AbstractStruct
     public function setShippingAddress(Address $shippingAddress): PaymentData
     {
         $this->shippingAddress = $shippingAddress;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentIntentUuid(): string
+    {
+        return $this->paymentIntentUuid;
+    }
+
+    /**
+     * @param string $paymentIntentUuid
+     * @return $this
+     */
+    public function setPaymentIntentUuid(string $paymentIntentUuid): PaymentData
+    {
+        $this->paymentIntentUuid = $paymentIntentUuid;
         return $this;
     }
 }
