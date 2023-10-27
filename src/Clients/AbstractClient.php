@@ -3,6 +3,8 @@
 namespace Montonio\Clients;
 
 use Exception;
+use Montonio\Exception\CurlErrorException;
+use Montonio\Exception\RequestException;
 
 abstract class AbstractClient
 {
@@ -52,8 +54,7 @@ abstract class AbstractClient
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $response = $this->execute($ch);
-        return json_decode($response, true);
+        return $this->execute($ch);
     }
 
     /**
@@ -62,16 +63,23 @@ abstract class AbstractClient
     private function execute($ch)
     {
         $response = curl_exec($ch);
+
         if ($response === false) {
-            $error_msg = "CURL Request failed: " . curl_error($ch);
-            curl_close($ch);
-            throw new Exception($error_msg);
+            throw new CurlErrorException(curl_error($ch), curl_errno($ch), $ch);
         }
-        curl_close($ch);
-        return $response;
+
+        $httpStatus = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if (200 <= $httpStatus && $httpStatus <= 299) {
+            curl_close($ch);
+            return json_decode($response, true);
+        }
+        throw new RequestException(
+            '',
+            $httpStatus,
+            $response,
+            $ch
+        );
     }
-
-
 
     protected function isSandbox(): bool
     {
