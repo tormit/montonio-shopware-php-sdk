@@ -6,6 +6,11 @@ namespace Montonio\Exception;
 
 class RequestException extends \RuntimeException
 {
+    /**
+     * @var string
+     */
+    private $response;
+
     public function __construct(
         string $message = "",
         int $code = 0,
@@ -13,11 +18,11 @@ class RequestException extends \RuntimeException
         ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
-        $this->message = $message;
+        $this->response = $response;
     }
 
-    public function getMessage(): string
+    public function getResponse(): string
     {
-        return $this->message;
+        return $this->response;
     }
 }
