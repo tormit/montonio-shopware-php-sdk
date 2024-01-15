@@ -7,12 +7,17 @@
     "payment",
     "payments"
   ],
-  "homepage": "https://github.com/mkreusch/montonio-php-sdk",
+  "homepage": "https://github.com/montonio/montonio-php-sdk",
   "license": "MIT",
   "authors": [
     {
       "name": "Marcus Kreusch",
       "email": "info@onlineshop.consulting"
+    },
+    {
+      "name": "Winkelwagen GmbH",
+      "email": "info@winkelwagen.de",
+      "homepage": "https://www.winkelwagen.de"
     }
   ],
   "autoload": {
