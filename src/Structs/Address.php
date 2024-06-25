@@ -23,6 +23,11 @@ class Address extends AbstractStruct
     /**
      * @var string
      */
+    protected $phoneNumber;
+
+    /**
+     * @var string
+     */
     protected $addressLine1;
 
     /**
@@ -96,6 +101,16 @@ class Address extends AbstractStruct
     public function setEmail(string $email): Address
     {
         $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @param string $phoneNr
+     * @return Address
+     */
+    public function setPhoneNumber(string $phoneNr): Address
+    {
+        $this->phoneNumber = $phoneNr;
         return $this;
     }
 
